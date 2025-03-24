@@ -31,18 +31,30 @@ export default function Chat() {
           })}
           <div>
             {message?.experimental_attachments
-              ?.filter((attachment) =>
-                attachment?.contentType?.startsWith("image/")
+              ?.filter(
+                (attachment) =>
+                  attachment?.contentType?.startsWith("image/") ||
+                  attachment?.contentType?.startsWith("application/pdf")
               )
-              .map((attachment, index) => (
-                <Image
-                  key={`${message.id}-${index}`}
-                  src={attachment.url}
-                  width={500}
-                  height={500}
-                  alt={attachment.name ?? `attachment-${index}`}
-                />
-              ))}
+              .map((attachment, index) =>
+                attachment.contentType?.startsWith("image/") ? (
+                  <Image
+                    key={`${message.id}-${index}`}
+                    src={attachment.url}
+                    width={500}
+                    height={500}
+                    alt={attachment.name ?? `attachment-${index}`}
+                  />
+                ) : attachment.contentType?.startsWith("application/pdf") ? (
+                  <iframe
+                    key={`${message.id}-${index}`}
+                    src={attachment.url}
+                    width={500}
+                    height={600}
+                    title={attachment.name ?? `attachment-${index}`}
+                  />
+                ) : null
+              )}
           </div>
         </div>
       ))}
