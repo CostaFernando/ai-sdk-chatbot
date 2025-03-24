@@ -1,11 +1,11 @@
 import { openrouter } from "@openrouter/ai-sdk-provider";
-import { streamText, tool } from "ai";
+import { streamText, tool, Message } from "ai";
 import { z } from "zod";
 
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages }: { messages: Message[] } = await req.json();
 
   const result = streamText({
     model: openrouter("google/gemini-2.0-flash-001"),
