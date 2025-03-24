@@ -24,6 +24,18 @@ export async function POST(req: Request) {
           };
         },
       }),
+      convertFahrenheitToCelsius: tool({
+        description: "Convert fahrenheit to celsius",
+        parameters: z.object({
+          fahrenheit: z.number().describe("The temperature in fahrenheit"),
+        }),
+        execute: async ({ fahrenheit }) => {
+          const celsius = Math.round((fahrenheit - 32) * (5 / 9));
+          return {
+            celsius,
+          };
+        },
+      }),
     },
   });
 
