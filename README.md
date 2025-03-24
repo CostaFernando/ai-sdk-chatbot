@@ -4,6 +4,7 @@ Features:
 - Streaming LLMs responses;
 - Use of OpenRouter as LLM provider;
 - Simple use of multiple tools;
+- Multimodal processing for images and pdfs.
 
 ## Getting Started
 
